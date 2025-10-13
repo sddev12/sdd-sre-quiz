@@ -11,3 +11,5 @@
 **eslint**: Yes
 
 **How the app will be built**: Static Site Generation
+
+**Components**: We will be building custom components not using any third party component libraries
