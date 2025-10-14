@@ -11,9 +11,20 @@ The homepage serves as the entry point for users to begin the SRE quiz. It sets 
 ## Layout & Structure
 
 - **Header:**
+
   - Black background, white uppercase text: `QUIZ TERMINAL`.
   - Full-width, bold, and high-contrast.
+
+- **Leaderboard Button:**
+
+  - Always visible on the homepage, regardless of quiz completion.
+  - Placed directly below the header, aligned to the left side of the page.
+  - Styled as a minimal, outlined button (uppercase, black border, white background, technical font).
+  - Label: `VIEW LEADERBOARD`.
+  - Navigates to the leaderboard page when clicked.
+
 - **Main Panel:**
+
   - Centered, rectangular white panel with a thick black border.
   - Contains:
     - Title: `SRE QUIZ` (large, uppercase, technical font).
@@ -27,6 +38,7 @@ The homepage serves as the entry point for users to begin the SRE quiz. It sets 
     - "Begin Quiz" button:
       - Uppercase, bold, black border, white background.
       - Disabled until a name is entered.
+
 - **Footer:**
   - Full-width, white background, black top border.
   - Left: `VERSION 0.1`.
@@ -64,6 +76,7 @@ The homepage serves as the entry point for users to begin the SRE quiz. It sets 
 +----------------------------------------------------------+
 | [BLACK HEADER] QUIZ TERMINAL                             |
 +----------------------------------------------------------+
+| [VIEW LEADERBOARD BUTTON]                                |
 |                                                          |
 |   +-----------------------------------------------+      |
 |   | SRE QUIZ                                      |      |
