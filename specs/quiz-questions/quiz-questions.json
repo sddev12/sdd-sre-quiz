@@ -1,0 +1,102 @@
+[
+  { "questionId": "01", "question": "What does SRE stand for?", "answers": [
+    { "text": "Software Resource Engineering", "isCorrect": false },
+    { "text": "Site Reliability Engineering", "isCorrect": true },
+    { "text": "Systematic Risk Evaluation", "isCorrect": false }
+  ] },
+  { "questionId": "02", "question": "What is the primary goal of SRE?", "answers": [
+    { "text": "To ensure reliable and scalable systems", "isCorrect": true },
+    { "text": "To manage marketing campaigns", "isCorrect": false },
+    { "text": "To write application features", "isCorrect": false }
+  ] },
+  { "questionId": "03", "question": "What is an SLO?", "answers": [
+    { "text": "Software License Option", "isCorrect": false },
+    { "text": "Systematic Logging Operation", "isCorrect": false },
+    { "text": "Service Level Objective", "isCorrect": true }
+  ] },
+  { "questionId": "04", "question": "What is an error budget?", "answers": [
+    { "text": "The maximum allowable threshold for errors in a system", "isCorrect": true },
+    { "text": "The number of engineers on call", "isCorrect": false },
+    { "text": "The cost of fixing bugs", "isCorrect": false }
+  ] },
+  { "questionId": "05", "question": "Which tool is commonly used for monitoring in SRE?", "answers": [
+    { "text": "Prometheus", "isCorrect": true },
+    { "text": "Excel", "isCorrect": false },
+    { "text": "Photoshop", "isCorrect": false }
+  ] },
+  { "questionId": "06", "question": "What is a postmortem in SRE?", "answers": [
+    { "text": "A daily standup meeting", "isCorrect": false },
+    { "text": "A backup process", "isCorrect": false },
+    { "text": "A document analyzing an incident after it occurs", "isCorrect": true }
+  ] },
+  { "questionId": "07", "question": "What is the purpose of automation in SRE?", "answers": [
+    { "text": "To slow down deployments", "isCorrect": false },
+    { "text": "To reduce manual toil and increase reliability", "isCorrect": true },
+    { "text": "To replace all engineers", "isCorrect": false }
+  ] },
+  { "questionId": "08", "question": "What is a runbook?", "answers": [
+    { "text": "A list of team members", "isCorrect": false },
+    { "text": "A documented procedure for handling known issues", "isCorrect": true },
+    { "text": "A financial report", "isCorrect": false }
+  ] },
+  { "questionId": "09", "question": "What is a common SRE practice for handling incidents?", "answers": [
+    { "text": "Weekly code reviews", "isCorrect": false },
+    { "text": "Quarterly business reviews", "isCorrect": false },
+    { "text": "On-call rotations", "isCorrect": true }
+  ] },
+  { "questionId": "10", "question": "What is a blameless culture?", "answers": [
+    { "text": "Focusing on learning from failures without individual blame", "isCorrect": true },
+    { "text": "Assigning blame to the responsible engineer", "isCorrect": false },
+    { "text": "Ignoring all incidents", "isCorrect": false }
+  ] },
+  { "questionId": "11", "question": "What is a service level indicator (SLI)?", "answers": [
+    { "text": "A type of server", "isCorrect": false },
+    { "text": "A deployment tool", "isCorrect": false },
+    { "text": "A metric that measures a specific aspect of service performance", "isCorrect": true }
+  ] },
+  { "questionId": "12", "question": "What is the 'Toil' in SRE?", "answers": [
+    { "text": "Manual, repetitive, automatable work", "isCorrect": true },
+    { "text": "A programming language", "isCorrect": false },
+    { "text": "A type of server", "isCorrect": false }
+  ] },
+  { "questionId": "13", "question": "What is the 'Golden Signal' in monitoring?", "answers": [
+    { "text": "A financial metric", "isCorrect": false },
+    { "text": "A key metric like latency, traffic, errors, or saturation", "isCorrect": true },
+    { "text": "A gold-plated server", "isCorrect": false }
+  ] },
+  { "questionId": "14", "question": "What is the purpose of a canary deployment?", "answers": [
+    { "text": "To test new changes on a small subset of users before full rollout", "isCorrect": true },
+    { "text": "To monitor bird populations", "isCorrect": false },
+    { "text": "To deploy only on weekends", "isCorrect": false }
+  ] },
+  { "questionId": "15", "question": "What is a playbook?", "answers": [
+    { "text": "A set of instructions for responding to specific scenarios", "isCorrect": true },
+    { "text": "A code repository", "isCorrect": false },
+    { "text": "A list of sports teams", "isCorrect": false }
+  ] },
+  { "questionId": "16", "question": "What is 'mean time to recovery' (MTTR)?", "answers": [
+    { "text": "The time between deployments", "isCorrect": false },
+    { "text": "The average time to restore service after an incident", "isCorrect": true },
+    { "text": "The time to write new features", "isCorrect": false }
+  ] },
+  { "questionId": "17", "question": "What is a 'black box' monitoring approach?", "answers": [
+    { "text": "Monitoring only the code", "isCorrect": false },
+    { "text": "Observing system behavior from the outside without internal knowledge", "isCorrect": true },
+    { "text": "Using only logs", "isCorrect": false }
+  ] },
+  { "questionId": "18", "question": "What is a 'white box' monitoring approach?", "answers": [
+    { "text": "Monitoring only the network", "isCorrect": false },
+    { "text": "Using only external probes", "isCorrect": false },
+    { "text": "Monitoring based on internal system metrics and instrumentation", "isCorrect": true }
+  ] },
+  { "questionId": "19", "question": "What is the purpose of chaos engineering?", "answers": [
+    { "text": "To create confusion in the team", "isCorrect": false },
+    { "text": "To intentionally inject failures to test system resilience", "isCorrect": true },
+    { "text": "To slow down deployments", "isCorrect": false }
+  ] },
+  { "questionId": "20", "question": "What is a 'pager duty'?", "answers": [
+    { "text": "An alerting system for on-call engineers", "isCorrect": true },
+    { "text": "A programming language", "isCorrect": false },
+    { "text": "A type of server", "isCorrect": false }
+  ] }
+]
