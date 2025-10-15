@@ -1,0 +1,9 @@
+# Ignore environment files
+.env
+
+# Ignore Go build output
+/bin/
+/build/
+*.exe
+*.test
+*.out
