@@ -43,6 +43,7 @@ func GetMongoClient() (*mongo.Client, error) {
 	// Ping the database to verify connection
 	if err := client.Ping(ctx, nil); err != nil {
 		clientInstanceErr = err
+		_ = client.Disconnect(ctx)
 		return nil, err
 	}
 	// Redact credentials in URI for logging
