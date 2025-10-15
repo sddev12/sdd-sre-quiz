@@ -1,0 +1,3 @@
+# Ignore local MongoDB data volume
+data/
+mongo_data/
