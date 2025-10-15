@@ -1,0 +1,217 @@
+openapi: 3.0.3
+info:
+  title: SRE Quiz API
+  version: 1.0.0
+  description: REST API for the SRE Quiz application
+servers:
+  - url: http://localhost:8080
+paths:
+  /start-quiz:
+    post:
+      summary: Start a new quiz session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+              required:
+                - username
+      responses:
+        '201':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /question:
+    get:
+      summary: Get a quiz question by ID
+      parameters:
+        - in: query
+          name: questionId
+          schema:
+            type: string
+          required: true
+          description: The ID of the question ("01" - "20")
+      responses:
+        '200':
+          description: Question returned
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  questionId:
+                    type: string
+                  question:
+                    type: string
+                  answers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        answerId:
+                          type: string
+                        answer:
+                          type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /submit-answer:
+    post:
+      summary: Submit an answer for a question
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                questionId:
+                  type: string
+                answerId:
+                  type: string
+              required:
+                - username
+                - questionId
+                - answerId
+      responses:
+        '200':
+          description: Answer submitted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /evaluate:
+    get:
+      summary: Evaluate a user's answers and return their score
+      parameters:
+        - in: query
+          name: username
+          schema:
+            type: string
+          required: true
+          description: The user's name
+      responses:
+        '200':
+          description: Evaluation complete
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  score:
+                    type: integer
+                  totalQuestions:
+                    type: integer
+                  totalTimeSeconds:
+                    type: integer
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Quiz not complete
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  /leaderboard:
+    get:
+      summary: Get the current leaderboard
+      responses:
+        '200':
+          description: Leaderboard returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                    score:
+                      type: integer
+                    totalTimeSeconds:
+                      type: integer
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
