@@ -11,6 +11,7 @@ import (
 	"github.com/joho/godotenv"
 
 	"github.com/sddev12/sdd-sre-quiz/api/internal/db"
+	"github.com/sddev12/sdd-sre-quiz/api/internal/handlers"
 )
 
 func main() {
@@ -53,6 +54,9 @@ func main() {
 			"message": "SRE Quiz API is running",
 		})
 	})
+
+	// POST /start-quiz endpoint
+	r.POST("/start-quiz", handlers.StartQuizHandler)
 
 	log.Printf("Starting server on :%s", port)
 	if err := r.Run(":" + port); err != nil {
