@@ -28,7 +28,7 @@ func getTestDB(t *testing.T) *mongo.Client {
 	t.Helper()
 	uri := os.Getenv("MONGODB_TEST_URI")
 	if uri == "" {
-		uri = "mongodb://localhost:27017/sre_quiz_test"
+		uri = "mongodb://localhost:27017/sre_quiz"
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
@@ -44,7 +44,7 @@ func getTestDB(t *testing.T) *mongo.Client {
 
 func cleanupTestUser(t *testing.T, client *mongo.Client, username string) {
 	t.Helper()
-	_ = client.Database("sre_quiz_test").Collection("users").Drop(context.Background())
+	_ = client.Database("sre_quiz").Collection("users").Drop(context.Background())
 }
 
 func TestStartQuizHandler(t *testing.T) {
@@ -82,7 +82,7 @@ func TestStartQuizHandler(t *testing.T) {
 		// insert user first
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
-		usersColl := client.Database("sre_quiz_test").Collection("users")
+		usersColl := client.Database("sre_quiz").Collection("users")
 		_, err := usersColl.InsertOne(ctx, bson.M{"username": "existinguser", "createdAt": time.Now(), "answers": []interface{}{}})
 		if err != nil {
 			t.Fatalf("failed to insert existing user: %v", err)
