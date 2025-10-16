@@ -16,6 +16,18 @@ The `POST /start-quiz` endpoint recevies the users name in the body of the reque
 
 The front end will call this endpoint when the user enters their name on the homepage and clicks the start quiz button.
 
+**Endpoint Logic**
+
+Receive POST request
+
+Parse body to get username
+
+Add a user record to the database under the users collection. The record will conform to the users model under the database/collections spec.
+
+If the user record already exists in the database, respond with 400 as defined below
+
+If the record is created successfull, respond with 201 as defined below
+
 **Request Body**
 
 ```
