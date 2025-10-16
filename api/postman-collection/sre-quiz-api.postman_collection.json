@@ -1,0 +1,38 @@
+{
+  "info": {
+    "_postman_id": "b1e2c1e0-1234-4a56-9abc-1234567890ab",
+    "name": "SRE Quiz API Local",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Collection for testing the SRE Quiz API locally."
+  },
+  "item": [
+    {
+      "name": "Start Quiz",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"JohnSmith\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/start-quiz",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "start-quiz"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
