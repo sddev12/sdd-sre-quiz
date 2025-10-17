@@ -81,13 +81,15 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
             {!isComplete && currentQuestion && (
                 <>
                     <div className="text-2xl font-bold uppercase text-center mb-6 font-mono text-black">{currentQuestion.text}</div>
-                    <div className="flex flex-col gap-4 mb-6">
+                    <div className="flex flex-col gap-4 mb-6" role="radiogroup">
                         {currentQuestion.answers.map((a) => (
                             <button
                                 key={a.id}
                                 className={`w-full border-2 rounded py-3 px-4 text-lg font-mono uppercase transition-all ${selectedAnswerId === a.id ? "bg-black text-white border-black" : "bg-white text-black border-black hover:bg-gray-200"}`}
                                 onClick={() => handleSelect(a.id)}
                                 disabled={isLoading}
+                                role="radio"
+                                aria-checked={selectedAnswerId === a.id}
                             >
                                 {a.text}
                             </button>
