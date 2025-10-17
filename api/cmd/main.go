@@ -58,6 +58,9 @@ func main() {
 	// POST /start-quiz endpoint
 	r.POST("/start-quiz", handlers.StartQuizHandler)
 
+	// GET /question endpoint
+	r.GET("/question", handlers.GetQuestionHandler)
+
 	log.Printf("Starting server on :%s", port)
 	if err := r.Run(":" + port); err != nil {
 		log.Fatalf("Failed to start server: %v", err)
