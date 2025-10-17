@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"log"
 	"net/http"
 	"os"
@@ -21,9 +22,16 @@ func main() {
 	}
 
 	// Connect to MongoDB
-	if _, err := db.GetMongoClient(); err != nil {
+	client, err := db.GetMongoClient()
+	if err != nil {
 		log.Fatalf("Failed to connect to MongoDB: %v", err)
 	}
+	// Ensure MongoDB client is disconnected on shutdown
+	defer func() {
+		if err := client.Disconnect(context.Background()); err != nil {
+			log.Printf("Error disconnecting MongoDB client: %v", err)
+		}
+	}()
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -57,6 +65,9 @@ func main() {
 
 	// POST /start-quiz endpoint
 	r.POST("/start-quiz", handlers.StartQuizHandler)
+
+	// GET /question endpoint
+	r.GET("/question", handlers.GetQuestionHandler)
 
 	log.Printf("Starting server on :%s", port)
 	if err := r.Run(":" + port); err != nil {

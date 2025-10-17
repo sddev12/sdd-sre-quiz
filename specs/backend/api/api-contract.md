@@ -1,5 +1,9 @@
 # API Contract for SRE Quiz App
 
+## MongoDB Connection Pattern
+
+All API endpoints must use a single, shared MongoDB client instance for all database operations. The connection to MongoDB should be established once at application startup and reused across all requests. This ensures efficient resource usage, avoids connection pool exhaustion, and provides consistent behavior. Do not create a new MongoDB connection for each request.
+
 This specification details the API contract for the backend REST API of the SRE Quiz App.
 
 ## Endpoints

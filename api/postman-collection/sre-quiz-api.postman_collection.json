@@ -33,6 +33,31 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "Get Question",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/question?questionId=01",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "question"
+          ],
+          "query": [
+            {
+              "key": "questionId",
+              "value": "01"
+            }
+          ]
+        }
+      },
+      "response": []
     }
   ]
 }
