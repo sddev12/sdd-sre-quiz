@@ -89,7 +89,7 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
                                 onClick={() => handleSelect(a.id)}
                                 disabled={isLoading}
                             >
-                                <span className="text-black">{a.text}</span>
+                                {a.text}
                             </button>
                         ))}
                     </div>
