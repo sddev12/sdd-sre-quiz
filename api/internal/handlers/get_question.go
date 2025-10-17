@@ -4,13 +4,11 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	"os"
-	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/sddev12/sdd-sre-quiz/api/internal/db"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 // Question model for response
@@ -79,13 +77,7 @@ func GetQuestionHandlerWithProvider(provider QuestionProvider) gin.HandlerFunc {
 
 // Default handler for production
 func GetQuestionHandler(c *gin.Context) {
-	uri := os.Getenv("MONGODB_URI")
-	if uri == "" {
-		uri = "mongodb://localhost:27017/sre_quiz"
-	}
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-	client, err := mongo.Connect(ctx, options.Client().ApplyURI(uri))
+	client, err := db.GetMongoClient()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"message": "Database connection error"})
 		return
