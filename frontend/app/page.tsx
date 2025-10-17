@@ -1,9 +1,11 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [name, setName] = useState("");
   const isNameEntered = name.trim().length > 0;
+  const router = useRouter();
   return (
     <div className="min-h-screen bg-white text-black font-mono flex flex-col">
       {/* HEADER */}
@@ -61,6 +63,11 @@ export default function Home() {
             className="uppercase border-4 border-black px-8 py-2 text-sm font-bold tracking-widest bg-white hover:bg-[#EAEAEA] transition-colors duration-100 focus:outline-none focus:ring-2 focus:ring-black disabled:opacity-40 disabled:cursor-not-allowed"
             tabIndex={0}
             disabled={!isNameEntered}
+            onClick={() => {
+              if (isNameEntered) {
+                router.push(`/quiz?name=${encodeURIComponent(name.trim())}`);
+              }
+            }}
           >
             Begin Quiz
           </button>
