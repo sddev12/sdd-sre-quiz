@@ -3,22 +3,23 @@ import React from "react";
 import { QuizComponent } from "./QuizComponent";
 import { useSearchParams } from "next/navigation";
 
-// Dummy implementations for now
+
+// Fetch question from backend API
 const fetchQuestion = async (index: number) => {
-    const questions = [
-        {
-            id: "q1",
-            text: "What does SRE stand for?",
-            answers: [
-                { id: "a1", text: "Site Reliability Engineer" },
-                { id: "a2", text: "Software Reliability Engineer" },
-                { id: "a3", text: "Systems Reliability Engineer" },
-                { id: "a4", text: "Secure Reliability Engineer" },
-            ],
-        },
-        // ...more questions
-    ];
-    return questions[index % questions.length];
+    // For now, always fetch question 01 for index 0
+    const questionId = String(index + 1).padStart(2, '0');
+    const res = await fetch(`http://localhost:8080/question?questionId=${questionId}`);
+    if (!res.ok) {
+        throw new Error('Failed to fetch question');
+    }
+    const data = await res.json();
+    // Map backend response to QuizComponent format
+    type Answer = { answerId: string; answer: string };
+    return {
+        id: data.questionId,
+        text: data.question,
+        answers: (data.answers || []).map((a: Answer) => ({ id: a.answerId, text: a.answer })),
+    };
 };
 
 const submitAnswer = async (questionId: string, answerId: string) => {
