@@ -70,3 +70,8 @@ The Quiz page presents the user with a series of questions, one at a time, and r
 - Timer starts when the quiz begins and stops when the last question is submitted.
 - After completion, user sees their score and time, and can view the leaderboard.
 - Only one quiz attempt per user.
+- When the user selects an answer and clicks "Submit Answer":
+  - The frontend sends a POST request to `/submit-answer` with the username, questionId, and answerId.
+  - If the API returns an error, the error is shown and the user can retry.
+  - On success, the next question is fetched from the backend and displayed.
+  - This repeats until all 20 questions are answered.

@@ -60,7 +60,34 @@ This specification describes the SRE Quiz user journey, including starting the q
   - If there is an error, the API responds with an error status and message.
   - The frontend displays an error message to the user and may offer a retry option.
 
-## Technical Details (Updated)
+### Step 3: Submit Answer and Progress
+
+1. **Submit Answer**
+
+   - After selecting an answer, the user clicks the "Submit Answer" button.
+   - The frontend sends a POST request to the backend API endpoint `/submit-answer` with the following JSON body:
+     ```json
+     {
+       "username": "<entered_username>",
+       "questionId": "<current_question_id>",
+       "answerId": "<selected_answer_id>"
+     }
+     ```
+
+2. **API Response Handling**
+
+   - **Success (200):**
+     - The API responds with a success message (e.g., `{ "message": "answer recorded" }`).
+     - The frontend increments the question number and makes a GET request for the next question.
+     - The next question is loaded and displayed as before.
+   - **Error (400, 404, 500):**
+     - If there is a validation error, user not found, or server error, the API responds with an error status and message.
+     - The frontend displays the error message to the user and prompts them to try submitting their answer again.
+     - The user remains on the current question until the answer is successfully submitted.
+
+3. **Repeat Process**
+   - Steps 1 and 2 repeat for each question until the user has answered all 20 questions.
+   - After the final question is answered and submitted, the frontend can proceed to quiz evaluation or completion steps (not covered here).
 
 ## Technical Details
 

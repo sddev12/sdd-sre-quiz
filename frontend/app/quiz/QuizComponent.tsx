@@ -33,6 +33,7 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
     const [score, setScore] = useState(0);
     const [isComplete, setIsComplete] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     // Timer
     useEffect(() => {
@@ -57,15 +58,25 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
     const handleSubmit = async () => {
         if (!currentQuestion || !selectedAnswerId) return;
         setIsLoading(true);
-        const res = await submitAnswer(currentQuestion.id, selectedAnswerId);
-        if (res.correct) setScore((s) => s + 1);
-        if (currentQuestionIndex + 1 < totalQuestions) {
-            setCurrentQuestionIndex((i) => i + 1);
-        } else {
-            setIsComplete(true);
-            onQuizComplete({ score: res.correct ? score + 1 : score, time: elapsedTime });
+        setError(null);
+        try {
+            const res = await submitAnswer(currentQuestion.id, selectedAnswerId);
+            if (res.correct) setScore((s) => s + 1);
+            if (currentQuestionIndex + 1 < totalQuestions) {
+                setCurrentQuestionIndex((i) => i + 1);
+            } else {
+                setIsComplete(true);
+                onQuizComplete({ score: res.correct ? score + 1 : score, time: elapsedTime });
+            }
+        } catch (err: unknown) {
+            if (typeof err === "object" && err && "message" in err) {
+                setError((err as { message?: string }).message || "Failed to submit answer. Please try again.");
+            } else {
+                setError("Failed to submit answer. Please try again.");
+            }
+        } finally {
+            setIsLoading(false);
         }
-        setIsLoading(false);
     };
 
     // Format time MM:SS
@@ -95,12 +106,17 @@ export const QuizComponent: React.FC<QuizComponentProps> = ({
                             </button>
                         ))}
                     </div>
+                    {error && (
+                        <div className="text-red-600 text-xs font-mono mb-2 text-center" role="alert">
+                            {error}
+                        </div>
+                    )}
                     <button
                         className="w-full border-2 border-black bg-white text-black font-bold uppercase py-3 rounded disabled:opacity-50"
                         onClick={handleSubmit}
                         disabled={!selectedAnswerId || isLoading}
                     >
-                        Submit Answer
+                        {isLoading ? "Submitting..." : "Submit Answer"}
                     </button>
                 </>
             )}

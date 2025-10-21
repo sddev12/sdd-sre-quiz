@@ -22,11 +22,27 @@ const fetchQuestion = async (index: number) => {
     };
 };
 
-const submitAnswer = async (questionId: string, answerId: string) => {
-    // Dummy: only a1 is correct
-    return { correct: answerId === "a1" };
+const submitAnswer = async (questionId: string, answerId: string, userName?: string) => {
+    // Use the provided userName from props or fallback
+    const username = userName || '';
+    const res = await fetch('http://localhost:8080/submit-answer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, questionId, answerId }),
+    });
+    if (res.ok) {
+        return { correct: true };
+    } else {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.message || 'Failed to submit answer');
+    }
 };
 
+
+// Wrapper to inject userName from QuizPage
+function makeSubmitAnswerWithUserName(userName: string) {
+    return (questionId: string, answerId: string) => submitAnswer(questionId, answerId, userName);
+}
 export default function QuizPage() {
     const searchParams = useSearchParams();
     const userName = searchParams.get("name") || "";
@@ -46,7 +62,7 @@ export default function QuizPage() {
                     totalQuestions={20}
                     onQuizComplete={handleQuizComplete}
                     fetchQuestion={fetchQuestion}
-                    submitAnswer={submitAnswer}
+                    submitAnswer={makeSubmitAnswerWithUserName(userName)}
                 />
             </main>
             <footer className="bg-white border-t-2 border-black py-2 px-4 flex justify-between text-xs font-mono">
