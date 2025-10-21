@@ -4,15 +4,17 @@ This is the main component of the quiz page. It matches the style of the homepag
 
 ## Responsibilities
 
-- Display the user’s name.
+- Display the users name.
 - Show quiz progress: current question number (e.g., 1/20).
 - Show elapsed time since quiz start.
 - Display the current question and answer options.
 - Allow answer selection (only one at a time).
 - Enable the submit button only after an answer is selected.
-- On submit, call the API to record the answer and fetch the next question.
+- On submit, call the `/submit-answer` API endpoint to record the answer for the user and question.
+- If the API returns an error, display the error and allow the user to retry.
+- On success, fetch the next question from the backend and display it.
 - Repeat until all 20 questions are answered.
-- After the last question, display a completion message, the user’s score, total time, and a button to view the leaderboard.
+- After the last question, display a completion message, the users score, total time, and a button to view the leaderboard.
 
 ## Component Diagram
 
@@ -64,8 +66,9 @@ This is the main component of the quiz page. It matches the style of the homepag
 - On mount, fetch the first question and start the timer.
 - When an answer is selected, enable the submit button.
 - On submit:
-  - Call `submitAnswer` with the selected answer.
-  - If not last question, fetch the next question and reset selection.
+  - Call `submitAnswer` (which POSTs to `/submit-answer`) with the selected answer, username, and questionId.
+  - If the API returns an error, display the error and allow the user to retry.
+  - If not last question, fetch the next question from the backend and reset selection.
   - If last question, stop timer, calculate score, set `isComplete`.
 - On completion, show score, time, and leaderboard button.
 

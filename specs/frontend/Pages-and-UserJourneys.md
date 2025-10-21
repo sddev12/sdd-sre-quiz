@@ -52,13 +52,14 @@ The application will have two user journeys:
 1. User arrives on the homepage
 2. User enters their name and clicks the begin quiz button
 3. User is moved to the Quiz page
-4. A Question component is displayed on the page. The component makes an API call to the backend API to retrive the first question and the possible answer choices
-5. The question is displayed in the component and the user can select one answer
-6. Once an answer is selcted a submit button on the component is enabled
-7. The user clicks submit, their answer is sent to the API and recorded in the database
-8. The next question is now loaded for the user via another API call.
-9. This process is repeated until the user has answered 20 questions
-10. Once the 20th and final question is answered the user sees a quiz completed message and is given their total score to see.
+4. A Question component is displayed on the page. The component makes a GET request to the backend API to retrieve the first question and the possible answer choices.
+5. The question is displayed in the component and the user can select one answer.
+6. Once an answer is selected a submit button on the component is enabled.
+7. The user clicks submit, and the frontend POSTs to `/submit-answer` with the username, questionId, and answerId.
+8. If the API returns an error, the error is shown and the user can retry submitting their answer.
+9. On success, the next question is loaded for the user via another API call.
+10. This process is repeated until the user has answered 20 questions.
+11. Once the 20th and final question is answered the user sees a quiz completed message and is given their total score to see.
 
 ### View the Leaderboard
 

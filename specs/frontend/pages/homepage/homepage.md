@@ -63,6 +63,9 @@ The homepage serves as the entry point for users to begin the SRE quiz. It sets 
 - Input shows a custom flashing block cursor.
 - "Begin Quiz" button is disabled until a name is entered.
 - Button and input have subtle hover/focus effects (no animation longer than 150ms).
+- When the user clicks "Begin Quiz", the frontend POSTs to `/start-quiz` on the backend API with the entered username.
+- If the API returns an error (e.g., user exists), the error is shown and the user can try again.
+- On success, the user is navigated to the quiz page with their username as a parameter.
 
 ## Accessibility
 
