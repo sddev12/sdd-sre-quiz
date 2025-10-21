@@ -4,8 +4,33 @@ import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [name, setName] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const isNameEntered = name.trim().length > 0;
   const router = useRouter();
+
+  const handleBeginQuiz = async () => {
+    if (!isNameEntered || loading) return;
+    setError(null);
+    setLoading(true);
+    try {
+      const res = await fetch("http://localhost:8080/start-quiz", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: name.trim() }),
+      });
+      if (res.status === 201) {
+        router.push(`/quiz?name=${encodeURIComponent(name.trim())}`);
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setError(data.message || "An error occurred. Please try again.");
+      }
+    } catch {
+      setError("Network error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="min-h-screen bg-white text-black font-mono flex flex-col">
       {/* HEADER */}
@@ -59,17 +84,18 @@ export default function Home() {
               }
             `}</style>
           </div>
+          {error && (
+            <div className="text-red-600 text-xs font-mono mb-2 text-center" role="alert">
+              {error}
+            </div>
+          )}
           <button
             className="uppercase border-4 border-black px-8 py-2 text-sm font-bold tracking-widest bg-white hover:bg-[#EAEAEA] transition-colors duration-100 focus:outline-none focus:ring-2 focus:ring-black disabled:opacity-40 disabled:cursor-not-allowed"
             tabIndex={0}
-            disabled={!isNameEntered}
-            onClick={() => {
-              if (isNameEntered) {
-                router.push(`/quiz?name=${encodeURIComponent(name.trim())}`);
-              }
-            }}
+            disabled={!isNameEntered || loading}
+            onClick={handleBeginQuiz}
           >
-            Begin Quiz
+            {loading ? "Starting..." : "Begin Quiz"}
           </button>
         </section>
       </main>
