@@ -58,6 +58,34 @@
         }
       },
       "response": []
+    },
+    {
+      "name": "Submit Answer",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"JohnSmith\",\n  \"questionId\": \"01\",\n  \"answerId\": \"02\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/submit-answer",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "submit-answer"
+          ]
+        }
+      },
+      "response": []
     }
   ]
 }

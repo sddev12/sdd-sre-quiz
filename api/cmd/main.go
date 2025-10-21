@@ -66,6 +66,9 @@ func main() {
 	// POST /start-quiz endpoint
 	r.POST("/start-quiz", handlers.StartQuizHandler)
 
+	// POST /submit-answer endpoint
+	r.POST("/submit-answer", handlers.SubmitAnswerHandler)
+
 	// GET /question endpoint
 	r.GET("/question", handlers.GetQuestionHandler)
 
